@@ -1,0 +1,26 @@
+require("dotenv").config();
+const connectDB = require("./config/connect");
+const express = require("express");
+const authRouter = require("./routes/auth");
+const userRouter = require("./routes/user");
+const companyRouter = require("./routes/company");
+
+const app = express();
+
+app.use("/api", authRouter);
+app.use("/api/user", userRouter);
+app.use("/api/company", companyRouter);
+
+// Start the server
+const port = process.env.PORT || 3001;
+
+const startServer = async () => {
+  try {
+    await connectDB(process.env.MONGO_URI);
+    app.listen(port, console.log(`Server is running on port ${port}`));
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+startServer();
