@@ -1,13 +1,17 @@
 require("dotenv").config();
 const connectDB = require("./config/connect");
 const express = require("express");
+const bodyParser = require("body-parser");
 const authRouter = require("./routes/auth");
 const userRouter = require("./routes/user");
 const companyRouter = require("./routes/company");
+const jobRoleRouter = require("./routes/jobrole");
 
 const app = express();
 
+app.use(bodyParser.json());
 app.use("/api", authRouter);
+app.use("/api", jobRoleRouter);
 app.use("/api/user", userRouter);
 app.use("/api/company", companyRouter);
 
