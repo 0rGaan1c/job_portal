@@ -5,3 +5,8 @@ const getDetails = () => {
 const updateDetails = () => {
   console.log("update details");
 };
+
+module.exports = {
+  getDetails,
+  updateDetails,
+};

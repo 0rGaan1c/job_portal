@@ -6,7 +6,7 @@ const User = require("../models/User");
 const Company = require("../models/Company");
 
 const register = async (req, res) => {
-  const { email, password: plainTextPassword, type } = req.body;
+  const { email, password: plainTextPassword, role } = req.body;
 
   if (plainTextPassword.length < 6) {
     return res.json({
@@ -18,16 +18,19 @@ const register = async (req, res) => {
   const password = await bcrypt.hashSync(plainTextPassword, 5);
 
   try {
-    const response =
-      type === "user"
+    const result =
+      role === "user"
         ? await User.create({
             email,
             password,
+            role,
           })
         : await Company.create({
             email,
             password,
+            role,
           });
+    res.send({ status: "ok", data: result });
   } catch (err) {
     console.error(err);
     return res.status(400).json({
@@ -35,37 +38,34 @@ const register = async (req, res) => {
       error: err.message,
     });
   }
-
-  res.send("mada");
 };
 
 const login = async (req, res) => {
-  const { email, password, type } = req.body;
+  const { email, password, role } = req.body;
 
   const user =
-    type === "user"
+    role === "user"
       ? await User.findOne({ email }).lean()
       : await Company.findOne({ email }).lean();
 
   if (!user) {
-    return res.json({ status: "error", error: `${type}/password is invalid.` });
+    return res.json({ status: "error", error: `${role}/password is invalid.` });
   }
 
   if (await bcrypt.compare(password, user.password)) {
     // the email and password combination is successful
     const token = jwt.sign(
-      { id: user._id, email: user.email },
+      { id: user._id, email: user.email, role: user.role },
       process.env.JWT_KEY
     );
     return res.json({ status: "ok", data: token });
   }
 
-  return res.json({ status: "error", error: `${type}/password is invalid.` });
+  return res.json({ status: "error", error: `${role}/password is invalid.` });
 };
 
-// needs to be change to forgot password with all the necessary changes
 const forgotPassword = async (req, res) => {
-  const { email, password, type } = req.body;
+  const { email, password, role } = req.body;
 
   if (!email || typeof email !== "string") {
     return res.json({ status: "error", error: "Invalid email" });
@@ -79,19 +79,19 @@ const forgotPassword = async (req, res) => {
   }
 
   const user =
-    type === "user"
+    role === "user"
       ? await User.findOne({ email }).lean()
       : await Company.findOne({ email }).lean();
 
   if (!user) {
-    return res.json({ status: "error", error: `${type} is invalid.` });
+    return res.json({ status: "error", error: `${role} is invalid.` });
   }
 
   try {
     const _id = user._id;
     const hashedPassword = await bcrypt.hashSync(password, 5);
 
-    type === "user"
+    role === "user"
       ? await User.updateOne({ _id }, { password: hashedPassword })
       : await Company.updateOne({ _id }, { password: hashedPassword });
   } catch (err) {

@@ -21,6 +21,13 @@ const CompanySchema = new mongoose.Schema({
     required: [true, requiredErrorMessage("Password")],
     minlength: [6, minLengthErrorMessage(6, "Password")],
   },
+  role: {
+    type: String,
+    required: [true, requiredErrorMessage("Type")],
+    default: "company",
+    enum: ["company"],
+    immutable: true,
+  },
   companyName: {
     type: String,
     // required: [true, requiredErrorMessage("Company Name")],

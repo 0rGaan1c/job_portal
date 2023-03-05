@@ -27,6 +27,13 @@ const UserSchema = new mongoose.Schema({
     minlength: [3, minLengthErrorMessage(3, "Name")],
     maxlength: [50, maxLengthErrorMessage(50, "Name")],
   },
+  role: {
+    type: String,
+    required: [true, requiredErrorMessage("Type")],
+    default: "user",
+    enum: ["user"],
+    immutable: true,
+  },
   jobRole: {
     type: String,
     // required: [true, requiredErrorMessage("Job Role")],
