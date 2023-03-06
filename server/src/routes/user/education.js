@@ -5,9 +5,16 @@ const {
   updateEducation,
   deleteEducation,
 } = require("../../controllers/user/education");
+const { userValidator } = require("../../middlewares/roleValidtor");
+const { tokenValidator } = require("../../middlewares/tokenValidator");
 const router = express.Router();
 
-router.route("/").get(getAllEducations).post(createEducation);
-router.route("/:id").delete(deleteEducation).patch(updateEducation);
+router.get("/:id", getAllEducations);
+router
+  .route("/")
+  // .get(getAllEducations)
+  .post(tokenValidator, userValidator, createEducation)
+  .delete(tokenValidator, userValidator, deleteEducation)
+  .patch(tokenValidator, userValidator, updateEducation);
 
 module.exports = router;

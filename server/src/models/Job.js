@@ -12,12 +12,12 @@ const JobSchema = new mongoose.Schema({
     required: [true, requiredErrorMessage("Company Id")],
     ref: "Company",
   },
-  jobName: {
-    type: String,
-    required: [true, requiredErrorMessage("Job Name")],
-    minlength: [3, minLengthErrorMessage(3, "Job Name")],
-    maxlength: [50, maxLengthErrorMessage(50, "Job Name")],
-  },
+  // jobName: {
+  //   type: String,
+  //   required: [true, requiredErrorMessage("Job Name")],
+  //   minlength: [3, minLengthErrorMessage(3, "Job Name")],
+  //   maxlength: [50, maxLengthErrorMessage(50, "Job Name")],
+  // },
   jobRole: {
     type: String,
     required: [true, requiredErrorMessage("Job Role")],

@@ -1,4 +1,4 @@
-const JobRole = require("../models/JobRole");
+const JobRole = require("../../models/JobRole");
 
 const getJobRoles = async (req, res) => {
   try {

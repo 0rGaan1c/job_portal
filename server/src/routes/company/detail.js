@@ -4,7 +4,10 @@ const {
   getDetails,
   updateDetails,
 } = require("../../controllers/company/detail");
+const { companyValidator } = require("../../middlewares/roleValidtor");
+const { tokenValidator } = require("../../middlewares/tokenValidator");
 
-router.route("/").get(getDetails).patch(updateDetails);
+router.get("/:id", getDetails);
+router.patch("/", tokenValidator, companyValidator, updateDetails);
 
 module.exports = router;

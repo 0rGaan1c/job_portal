@@ -9,8 +9,8 @@ const detailRouter = require("./user/detail");
 router.use("/project", projectRouter);
 router.use("/education", educationRouter);
 router.use("/workexp", workExpRouter);
-router.use("/job", jobRouter);
 // for updating jobrole, name, bio, skills
 router.use("/detail", detailRouter);
+router.use("/job", jobRouter);
 
 module.exports = router;

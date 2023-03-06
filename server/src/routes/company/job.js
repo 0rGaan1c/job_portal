@@ -3,11 +3,17 @@ const router = express.Router();
 const {
   getAllJobs,
   createJob,
-  getAppliedUser,
+  getAppliedUsers,
   updateAppliedJob,
 } = require("../../controllers/company/job");
+const { companyValidator } = require("../../middlewares/roleValidtor");
+const { tokenValidator } = require("../../middlewares/tokenValidator");
 
-router.route("/").get(getAllJobs).post(createJob);
-router.route("/applied").get(getAppliedUser).patch(updateAppliedJob);
+router.get("/:id", getAllJobs);
+router.route("/").post(tokenValidator, companyValidator, createJob);
+router
+  .route("/applied")
+  .post(tokenValidator, companyValidator, getAppliedUsers)
+  .patch(tokenValidator, companyValidator, updateAppliedJob);
 
 module.exports = router;

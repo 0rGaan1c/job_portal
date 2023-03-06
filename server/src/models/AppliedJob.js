@@ -6,7 +6,7 @@ const {
   maxLengthErrorMessage,
 } = require("../utils");
 
-const JobSchema = new mongoose.Schema({
+const AppliedJobSchema = new mongoose.Schema({
   company: {
     type: mongoose.Schema.ObjectId,
     required: [true, requiredErrorMessage("Company Id")],
@@ -28,4 +28,4 @@ const JobSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model("Job", JobSchema);
+module.exports = mongoose.model("AppliedJob", AppliedJobSchema);

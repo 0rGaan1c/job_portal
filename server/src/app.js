@@ -5,13 +5,13 @@ const bodyParser = require("body-parser");
 const authRouter = require("./routes/auth");
 const userRouter = require("./routes/user");
 const companyRouter = require("./routes/company");
-const jobRoleRouter = require("./routes/jobrole");
+const globalRouter = require("./routes/global");
 
 const app = express();
 
 app.use(bodyParser.json());
 app.use("/api", authRouter);
-app.use("/api", jobRoleRouter);
+app.use("/api", globalRouter);
 app.use("/api/user", userRouter);
 app.use("/api/company", companyRouter);
 
