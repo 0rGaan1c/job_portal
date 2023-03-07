@@ -1,9 +1,8 @@
 const express = require("express");
 const router = express.Router();
-const jobRoleRouter = require("./global/jobrole");
-const allJobRouter = require("./global/alljob");
+const { getAllJobs, getJobRoles } = require("../controllers/global.js");
 
-router.use("/", jobRoleRouter);
-router.use("/", allJobRouter);
+router.get("/jobrole", getJobRoles);
+router.get("/alljob", getAllJobs);
 
 module.exports = router;
