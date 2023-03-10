@@ -6,7 +6,17 @@ const User = require("../models/User");
 const Company = require("../models/Company");
 
 const register = async (req, res) => {
-  const { email, password: plainTextPassword, role } = req.body;
+  const {
+    email,
+    password: plainTextPassword,
+    role,
+    name,
+    jobRole,
+    skills,
+    bio,
+    companyName,
+    companyDescription,
+  } = req.body;
 
   if (plainTextPassword.length < 6) {
     return res.json({
@@ -24,11 +34,17 @@ const register = async (req, res) => {
             email,
             password,
             role,
+            name,
+            jobRole,
+            skills,
+            bio,
           })
         : await Company.create({
             email,
             password,
             role,
+            companyName,
+            companyDescription,
           });
     res.send({ status: "ok", data: result });
   } catch (err) {
@@ -58,7 +74,7 @@ const login = async (req, res) => {
       { id: user._id, email: user.email, role: user.role },
       process.env.JWT_KEY
     );
-    return res.json({ status: "ok", data: token });
+    return res.json({ status: "ok", data: { token, userId: user._id } });
   }
 
   return res.json({ status: "error", error: `${role}/password is invalid.` });

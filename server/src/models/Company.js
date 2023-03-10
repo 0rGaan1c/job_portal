@@ -30,14 +30,12 @@ const CompanySchema = new mongoose.Schema({
   },
   companyName: {
     type: String,
-    // required: [true, requiredErrorMessage("Company Name")],
-    minlength: [3, minLengthErrorMessage(3, "Company Name")],
+    required: [true, requiredErrorMessage("Company Name")],
     maxlength: [50, maxLengthErrorMessage(50, "Company Name")],
   },
   companyDescription: {
     type: String,
-    // required: [true, requiredErrorMessage("Company Description")],
-    minlength: [0, minLengthErrorMessage(3, "Company Description")],
+    required: [true, requiredErrorMessage("Company Description")],
     maxlength: [200, maxLengthErrorMessage(50, "Company Description")],
   },
 });

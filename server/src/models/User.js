@@ -23,8 +23,7 @@ const UserSchema = new mongoose.Schema({
   },
   name: {
     type: String,
-    // required: [true, requiredErrorMessage("Name")],
-    minlength: [3, minLengthErrorMessage(3, "Name")],
+    required: [true, requiredErrorMessage("Name")],
     maxlength: [50, maxLengthErrorMessage(50, "Name")],
   },
   role: {
@@ -36,11 +35,11 @@ const UserSchema = new mongoose.Schema({
   },
   jobRole: {
     type: String,
-    // required: [true, requiredErrorMessage("Job Role")],
+    required: [true, requiredErrorMessage("Job Role")],
   },
   skills: {
     type: [String],
-    // required: [true, requiredErrorMessage("Skill")],
+    required: [true, requiredErrorMessage("Skill")],
     min: [1, "Atleast one skill is required"],
   },
   bio: {

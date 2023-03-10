@@ -1,3 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.register-input {
+  @apply input input-ghost bg-transparent input-bordered w-full border-gray-500 focus:text-white focus:bg-inherit  text-sm;
+}
+
+.register-select {
+  @apply select select-ghost bg-transparent w-full border-gray-500 focus:text-white focus:bg-inherit text-sm;
+}
