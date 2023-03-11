@@ -5,6 +5,7 @@ const getDetails = async (req, res) => {
   try {
     let result = await User.find({ _id: id });
     result = {
+      email: result[0].email,
       skills: result[0].skills,
       bio: result[0].bio,
       name: result[0].name,

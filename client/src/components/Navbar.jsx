@@ -1,9 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const Navbar = () => {
+const Navbar = ({ color }) => {
   return (
-    <nav className="flex items-center justify-between text-white  py-6 px-8">
+    <nav
+      className="flex items-center justify-between text-white py-6 px-8"
+      style={{ color: color }}
+    >
       <div className="flex items-center gap-10 font-medium">
         <h1 className="font-bold text-xl">
           <Link to="/">(JOBS)</Link>

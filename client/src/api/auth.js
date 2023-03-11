@@ -1,5 +1,4 @@
 import axios from "axios";
-import { toast } from "react-hot-toast";
 import { URL } from "./constant";
 
 export const register = async (formData) => {

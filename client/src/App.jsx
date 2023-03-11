@@ -9,6 +9,7 @@ import { CookiesProvider } from "react-cookie";
 import PublicRoutes from "../src/Routes/PublicRoute";
 import CandidateRoutes from "./Routes/CandidateRoutes";
 import CompanyRoutes from "./Routes/CompanyRoutes";
+import Browse from "../src/pages/Candidate/Browse";
 
 function App() {
   return (
@@ -25,7 +26,9 @@ function App() {
           </Route>
           {/* Candidate Private Routes */}
           <Route path="/candidate" element={<CandidateRoutes />}>
-            <Route path="browse" element={<div>Browse</div>} />
+            <Route path="browse" element={<Browse />} />
+            <Route path="applied" element={<div>Applied</div>} />
+            <Route path="profile" element={<div>Profile</div>} />
           </Route>
           {/* Company Private Routes */}
           <Route path="/company" element={<CompanyRoutes />}>

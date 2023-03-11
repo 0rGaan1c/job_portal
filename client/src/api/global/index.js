@@ -13,8 +13,9 @@ export const getAllJobs = async () => {
 export const getJobRoles = async () => {
   try {
     const { data } = await axios.get(`${URL}/jobrole`);
-    return data.status === "ok" ? data.data : [];
+    return data.status === "ok" ? data.data : false;
   } catch (err) {
     console.error(err);
+    return false;
   }
 };

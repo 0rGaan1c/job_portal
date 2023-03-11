@@ -1,5 +1,6 @@
 import React from "react";
 import { Navigate, Outlet } from "react-router-dom";
+import LoggedNavbar from "../../components/LoggedNavbar";
 import { useAuth } from "../../hooks/useAuth";
 
 const index = () => {
@@ -7,7 +8,10 @@ const index = () => {
 
   return auth.status ? (
     auth.role === "company" ? (
-      <Outlet />
+      <>
+        <LoggedNavbar />
+        <Outlet />
+      </>
     ) : (
       <Navigate to="/candidate/browse" />
     )

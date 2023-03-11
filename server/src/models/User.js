@@ -38,9 +38,8 @@ const UserSchema = new mongoose.Schema({
     required: [true, requiredErrorMessage("Job Role")],
   },
   skills: {
-    type: [String],
+    type: String,
     required: [true, requiredErrorMessage("Skill")],
-    min: [1, "Atleast one skill is required"],
   },
   bio: {
     type: String,

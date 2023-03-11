@@ -23,7 +23,7 @@ const index = () => {
     },
   ];
 
-  const [_, setCookies] = useCookies(["access_token"]);
+  const [_, setCookie] = useCookies(["access_token"]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -54,7 +54,7 @@ const index = () => {
     if (result.status === "ok") {
       console.log(result.data);
       window.localStorage.setItem("userID", result.data.userId);
-      setCookies("access_token", result.data.token);
+      setCookie("access_token", result.data.token, { path: "/" });
       setIsLoading(false);
     }
   };

@@ -23,9 +23,8 @@ const JobSchema = new mongoose.Schema({
     required: [true, requiredErrorMessage("Job Role")],
   },
   skills: {
-    type: [String],
+    type: String,
     required: [true, requiredErrorMessage("Skill")],
-    min: [1, "Atleast 1 skill is required"],
   },
   expRequired: {
     type: Number,
