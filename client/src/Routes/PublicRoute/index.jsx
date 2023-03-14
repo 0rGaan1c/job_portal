@@ -9,7 +9,7 @@ const index = () => {
     auth.role === "user" ? (
       <Navigate to="/candidate/browse" />
     ) : (
-      <Navigate to="/company/jobs" />
+      <Navigate to="/company/job" />
     )
   ) : (
     <Outlet />

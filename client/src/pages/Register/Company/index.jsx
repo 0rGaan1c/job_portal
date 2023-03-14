@@ -19,7 +19,6 @@ const index = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    console.log(companyName, email, password, companyDescription);
     if (password !== confirmPassword) {
       toast.error("Password doesn't match.");
       return;

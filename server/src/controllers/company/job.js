@@ -1,5 +1,6 @@
 const AppliedJob = require("../../models/AppliedJob");
 const Job = require("../../models/Job");
+const User = require("../../models/User");
 
 const getAllJobs = async (req, res) => {
   const id = req.params.id;

@@ -19,3 +19,13 @@ export const getJobRoles = async () => {
     return false;
   }
 };
+
+export const getJobByID = async (id) => {
+  try {
+    const { data } = await axios.get(`${URL}/job/${id}`);
+    return data.status === "ok" ? data.data[0] : false;
+  } catch (err) {
+    console.error(err);
+    return false;
+  }
+};

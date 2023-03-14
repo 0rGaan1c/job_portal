@@ -46,17 +46,20 @@ const index = () => {
       setIsLoading(false);
       return;
     }
-    if (result.status === "error" && result.error.includes("user/password")) {
+    if (result.status === "error" && result.error.includes("/password")) {
       toast.error("Email or Password is invalid.");
       setIsLoading(false);
       return;
     }
     if (result.status === "ok") {
-      console.log(result.data);
       window.localStorage.setItem("userID", result.data.userId);
       setCookie("access_token", result.data.token, { path: "/" });
       setIsLoading(false);
+      return;
     }
+
+    toast.error("Something went wrong");
+    setIsLoading(false);
   };
 
   return (

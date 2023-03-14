@@ -1,5 +1,6 @@
 import React from "react";
 import { Navigate, Outlet } from "react-router-dom";
+import CompanyNav from "../../components/CompanyNav";
 import LoggedNavbar from "../../components/LoggedNavbar";
 import { useAuth } from "../../hooks/useAuth";
 
@@ -10,6 +11,7 @@ const index = () => {
     auth.role === "company" ? (
       <>
         <LoggedNavbar />
+        <CompanyNav />
         <Outlet />
       </>
     ) : (

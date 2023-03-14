@@ -15,7 +15,7 @@ const index = () => {
         <Outlet />
       </>
     ) : (
-      <Navigate to="/company/jobs" />
+      <Navigate to="/company/job" />
     )
   ) : (
     <Navigate to="/login" />

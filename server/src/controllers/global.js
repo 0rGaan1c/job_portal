@@ -21,4 +21,15 @@ const getAllJobs = async (req, res) => {
   }
 };
 
-module.exports = { getJobRoles, getAllJobs };
+const getJobByID = async (req, res) => {
+  const id = req.params.id;
+  try {
+    const job = await Job.find({ _id: id });
+    res.send({ status: "ok", data: job });
+  } catch (err) {
+    console.error(err);
+    res.send({ status: "error", error: err.message });
+  }
+};
+
+module.exports = { getJobRoles, getAllJobs, getJobByID };

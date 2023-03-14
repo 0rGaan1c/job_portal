@@ -15,7 +15,7 @@ const getAllAppliedJobs = async (req, res) => {
 
 const applyToJob = async (req, res) => {
   const { id } = req.decoded;
-  const { companyID, jobID, jobStatus } = req.body;
+  const { companyID, jobID } = req.body;
   try {
     const findJob = await AppliedJob.find({
       user: id,
@@ -33,7 +33,7 @@ const applyToJob = async (req, res) => {
       user: id,
       company: companyID,
       job: jobID,
-      jobStatus,
+      jobStatus: "Pending",
     });
     res.json({ status: "ok", data: result });
   } catch (err) {

@@ -2,22 +2,22 @@ import React, { useEffect, useState } from "react";
 import Avatar from "react-avatar";
 import { useCookies } from "react-cookie";
 import { toast } from "react-hot-toast";
+import JobModal from "../components/JobModal";
+import { getCompanyDetails } from "../api/company/getCompanyDetails";
+import { applyToJobs } from "../api/candidate/applyToJobs";
+import JobStatus from "./JobStatus";
 
-import { getCompanyDetails } from "../../../api/company/getCompanyDetails";
-import { applyToJobs } from "../../../api/candidate/applyToJobs";
-import JobModal from "./JobModal";
-
-const JobCard = ({
-  job: {
+const JobCard = ({ job, isAppliedPage, isBrowsePage }) => {
+  const {
     company,
     compensation,
     expRequired,
     jobDescription,
     jobRole,
     skills,
+    jobStatus,
     _id,
-  },
-}) => {
+  } = job;
   const [companyDetail, setCompanyDetail] = useState("");
   const [cookie, setCookie] = useCookies(["access_token"]);
   const [isApplied, setIsApplied] = useState(false);
@@ -27,7 +27,6 @@ const JobCard = ({
       token: cookie.access_token,
       companyID: company,
       jobID: _id,
-      jobStatus: "Pending",
     };
     const result = await applyToJobs(formData);
 
@@ -67,23 +66,28 @@ const JobCard = ({
           <p>{companyDetail?.companyDescription}</p>
         </div>
       </div>
-      <div className="border rounded-md mt-6 px-4 py-2 flex items-center justify-between">
-        <p className="font-medium">
-          {jobRole} |<span className="ml-2">₹ {compensation} LPA</span>
-        </p>
-        {!isApplied ? (
-          <label
-            htmlFor={`job-apply-modal-${_id}`}
-            className="cursor-pointer btn btn-outline btn-success"
-          >
-            Apply
-          </label>
-        ) : (
-          <label className="cursor-pointer btn btn-outline btn-success">
-            Applied
-          </label>
-        )}
-      </div>
+
+      <label htmlFor={`job-apply-modal-${_id}`} className="cursor-pointer">
+        <div className="border rounded-md mt-6 px-4 py-2 flex items-center justify-between">
+          <p className="font-medium">
+            {jobRole} |<span className="ml-2">₹ {compensation} LPA</span>
+          </p>
+          {isBrowsePage &&
+            (!isApplied ? (
+              <label
+                htmlFor={`job-apply-modal-${_id}`}
+                className="cursor-pointer btn btn-outline btn-success"
+              >
+                Apply
+              </label>
+            ) : (
+              <label className="cursor-pointer btn btn-outline btn-success">
+                Applied
+              </label>
+            ))}
+          {isAppliedPage && <JobStatus jobStatus={jobStatus} />}
+        </div>
+      </label>
       <JobModal
         companyDetail={companyDetail}
         jobDescription={jobDescription}
@@ -93,6 +97,9 @@ const JobCard = ({
         jobRole={jobRole}
         applyJob={applyJob}
         _id={_id}
+        isBrowsePage={isBrowsePage}
+        isAppliedPage={isAppliedPage}
+        jobStatus={jobStatus}
       />
     </div>
   );
