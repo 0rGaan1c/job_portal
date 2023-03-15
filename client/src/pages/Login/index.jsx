@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { toast } from "react-hot-toast";
 import { Link } from "react-router-dom";
 import { login } from "../../api/auth";
-import FormInput from "../../components/FormInput";
-import RegisterFormLabel from "../../components/RegisterFormLabel";
+import AuthInput from "../../components/AuthInput";
+import InputLabel from "../../components/InputLabel";
 import { useCookies } from "react-cookie";
 import SubmitButton from "../../components/SubmitButton";
 
@@ -67,22 +67,22 @@ const index = () => {
       <h2 className="w-[40%] mx-auto py-2 text-xl font-medium">Log In</h2>
       <div className="w-[40%] mx-auto h-[48vh] border-2 rounded-md p-4 border-white">
         <form onSubmit={handleSubmit}>
-          <FormInput
+          <AuthInput
             type="email"
             label="Email *"
             required={true}
             setInputText={setEmail}
           />
-          <FormInput
+          <AuthInput
             type="password"
             label="Password *"
             required={true}
             setInputText={setPassword}
           />
           <div className="form-control my-2">
-            <RegisterFormLabel label={"Select Account Type *"} />
+            <InputLabel label={"Select Account Type *"} color="white" />
             <select
-              className="register-select"
+              className="white-select"
               required
               onChange={(e) => {
                 setRole(e.target.value);

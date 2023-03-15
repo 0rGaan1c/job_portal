@@ -3,8 +3,8 @@ import { useCookies } from "react-cookie";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
 import Avatar from "react-avatar";
-import { getCandidateDetails } from "../api/candidate/getCandidateDetails";
-import { getCompanyDetails } from "../api/company/getCompanyDetails";
+import { getCandidateDetails } from "../api/candidate/index";
+import { getCompanyDetails } from "../api/company/index";
 import { toast } from "react-hot-toast";
 
 const LoggedNavbar = () => {

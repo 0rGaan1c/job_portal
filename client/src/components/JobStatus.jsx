@@ -7,7 +7,7 @@ const JobStatus = ({ jobStatus }) => {
         className={`w-2 h-2 rounded-full ${
           jobStatus === "Pending" ? "bg-gray-500" : ""
         }
-              ${jobStatus === "Reviewing" ? "bg-yello-500" : ""}
+              ${jobStatus === "Reviewing" ? "bg-yellow-500" : ""}
               ${jobStatus === "Rejected" ? "bg-red-500" : ""}
               ${jobStatus === "Accepted" ? "bg-green-500" : ""}
               

@@ -34,12 +34,35 @@ const createJob = async (req, res) => {
 };
 
 // console.log("get list of users who have applied for the job");
+// const getAppliedUsers = async (req, res) => {
+//   const { id } = req.decoded;
+//   const { jobID } = req.body;
+//   try {
+//     const result = await AppliedJob.find({ company: id, job: jobID });
+//     res.json({ status: "ok", data: result });
+//   } catch (err) {
+//     console.error(err);
+//     res.send({ status: "error", error: err.message });
+//   }
+// };
+
 const getAppliedUsers = async (req, res) => {
   const { id } = req.decoded;
   const { jobID } = req.body;
   try {
     const result = await AppliedJob.find({ company: id, job: jobID });
-    res.json({ status: "ok", data: result });
+    const userIds = result.map((appliedJob) => appliedJob.user);
+    const users = await User.find({ _id: { $in: userIds } });
+
+    // Combine result data with user data
+    const responseData = result.map((job) => {
+      const matchingUser = users.find(
+        (user) => user._id.toString() === job.user.toString()
+      );
+      return { ...job.toObject(), user: matchingUser };
+    });
+
+    res.json({ status: "ok", data: responseData });
   } catch (err) {
     console.error(err);
     res.send({ status: "error", error: err.message });
@@ -61,9 +84,22 @@ const updateAppliedJob = async (req, res) => {
   }
 };
 
+const getJobStatus = async (req, res) => {
+  const { userID, jobID } = req.body;
+
+  try {
+    const result = await AppliedJob.find({ user: userID, job: jobID });
+    res.json({ status: "ok", data: result });
+  } catch (err) {
+    console.error(err);
+    res.send({ status: "error", error: err.message });
+  }
+};
+
 module.exports = {
   getAllJobs,
   createJob,
   getAppliedUsers,
   updateAppliedJob,
+  getJobStatus,
 };

@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
-import { getAllCompanyJobs } from "../../../api/company/getAllCompanyJobs";
+import { getAllCompanyJobs } from "../../../api/company/index";
 import { Link } from "react-router-dom";
 import JobCard from "../../../components/JobCard";
 import ContentLayout from "../../../Layout/ContentLayout";
+import AddJobModal from "./AddJobModal";
 
 const index = () => {
   const [companyJobs, setCompanyJobs] = useState([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -23,10 +25,19 @@ const index = () => {
     };
 
     fetchData();
-  }, []);
+  }, [isModalOpen]);
 
   return (
     <ContentLayout>
+      <div className="mb-4 flex justify-end">
+        <label
+          className="btn btn-success text-white"
+          htmlFor="add-job"
+          onClick={() => setIsModalOpen(true)}
+        >
+          Add New Job
+        </label>
+      </div>
       {companyJobs.length !== 0 ? (
         companyJobs.map((job) => {
           return (
@@ -42,6 +53,11 @@ const index = () => {
       ) : (
         <div>You haven't added any jobs yet.</div>
       )}
+      <AddJobModal
+        id={"add-job"}
+        setIsModalOpen={setIsModalOpen}
+        isModalOpen={isModalOpen}
+      />
     </ContentLayout>
   );
 };

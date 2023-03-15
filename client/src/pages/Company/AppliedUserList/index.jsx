@@ -3,8 +3,7 @@ import Avatar from "react-avatar";
 import { useCookies } from "react-cookie";
 import { toast } from "react-hot-toast";
 import { useLocation } from "react-router-dom";
-import { getCandidateDetails } from "../../../api/candidate/getCandidateDetails";
-import { getAppliedUsers } from "../../../api/company/getAppliedUsers";
+import { getAppliedUsers } from "../../../api/company/index";
 import { getJobByID } from "../../../api/global";
 import ContentLayout from "../../../Layout/ContentLayout";
 import { Link } from "react-router-dom";
@@ -14,7 +13,6 @@ const index = () => {
   const location = useLocation();
   const { id } = location.state;
   const [appliedUsers, setAppliedUsers] = useState([]);
-  const [appliedUserList, setAppliedUserList] = useState([]);
   const [job, setJob] = useState([]);
   const [cookie] = useCookies(["access_token"]);
 
@@ -34,34 +32,11 @@ const index = () => {
     fetchData();
   }, []);
 
-  useEffect(() => {
-    if (appliedUsers.length) {
-      const fetchData = async () => {
-        const list = [];
-        for (let i = 0; i < appliedUsers.length; i++) {
-          const result = await getCandidateDetails(appliedUsers[i].user);
-
-          if (!result) {
-            toast.error("Something went wrong");
-            return;
-          }
-          const withStatus = {
-            ...result,
-            jobStatus: appliedUsers[i].jobStatus,
-          };
-          list.push(withStatus);
-        }
-        setAppliedUserList(list);
-      };
-      fetchData();
-    }
-  }, [appliedUsers]);
-
   return (
     <ContentLayout>
       <div className="">
-        <p className="font-medium text-lg">{job.jobRole}</p>
-        <div className="border p-4 rounded-sm">
+        <p className="font-medium text-xl mb-4">{job.jobRole}</p>
+        <div className="border-2 p-4 rounded-sm">
           <p className="font-medium">Description</p>
           <p className="mb-4">{job.jobDescription}</p>
           <p>
@@ -75,18 +50,19 @@ const index = () => {
         </div>
       </div>
 
-      {appliedUserList.length !== 0 ? (
+      {appliedUsers.length !== 0 ? (
         <div className="my-8">
           <p className="font-medium">Applied Candidates</p>
           <div className="flex flex-wrap gap-5">
-            {appliedUserList.map((user) => {
+            {appliedUsers.map(({ user }) => {
               return (
                 <Link
                   to="/company/job/applied/user"
                   key={user._id}
                   className="w-[45%]"
+                  state={{ userID: user._id, jobID: job._id }}
                 >
-                  <div className="my-4 border rounded-sm p-2  cursor-pointer">
+                  <div className="my-4 border-2 rounded-sm p-2  cursor-pointer">
                     <div className="flex gap-5 items-center">
                       <Avatar name={user.name} size="40" round={8} />
                       <p>{user.name}</p>

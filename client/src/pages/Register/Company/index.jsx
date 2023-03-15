@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import AuthLayout from "../../../Layout/AuthLayout";
-import RegisterFormLabel from "../../../components/RegisterFormLabel";
-import FormInput from "../../../components/FormInput";
+import InputLabel from "../../../components/InputLabel";
+import AuthInput from "../../../components/AuthInput";
 import SubmitButton from "../../../components/SubmitButton";
 import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
@@ -67,26 +67,26 @@ const index = () => {
       ) : (
         <form onSubmit={handleSubmit}>
           <div className="grid grid-cols-2 gap-2">
-            <FormInput
+            <AuthInput
               type="text"
               label="Company Name *"
               required={true}
               setInputText={setCompanyName}
             />
-            <FormInput
+            <AuthInput
               type="email"
               label="Email *"
               required={true}
               setInputText={setEmail}
             />
-            <FormInput
+            <AuthInput
               type="password"
               label="Password *"
               required={true}
               setInputText={setPassword}
               minlength={6}
             />
-            <FormInput
+            <AuthInput
               type="password"
               label="Confirm Password *"
               required={true}
@@ -95,7 +95,7 @@ const index = () => {
           </div>
 
           <div className="form-control mt-6">
-            <RegisterFormLabel label={"Company Description *"} />
+            <InputLabel label={"Company Description *"} color="white" />
             <textarea
               className="textarea textarea-bordered h-44 bg-transparent border-slate-500 w-full"
               maxLength={200}

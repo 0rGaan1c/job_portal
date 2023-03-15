@@ -9,14 +9,14 @@ const CompanyNav = () => {
       <Link
         to="/company/job"
         className={`${
-          currentPath.includes("job") && !currentPath.includes("applied")
+          currentPath.includes("job")
             ? "font-medium border-b-2 border-black"
             : ""
         } hover:font-medium`}
       >
         Jobs
       </Link>
-      <Link
+      {/* <Link
         to="/company/p"
         className={`${
           currentPath.includes("job/applied")
@@ -25,7 +25,7 @@ const CompanyNav = () => {
         } hover:font-medium`}
       >
         Applied
-      </Link>
+      </Link> */}
       <Link
         to="/company/profile"
         className={`${

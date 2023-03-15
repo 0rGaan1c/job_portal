@@ -1,11 +1,25 @@
 const AppliedJob = require("../../models/AppliedJob");
+const Job = require("../../models/Job");
 
 const getAllAppliedJobs = async (req, res) => {
   const id = req.params.id;
   try {
-    const result = await AppliedJob.find({
-      user: id,
+    const appliedJobs = await AppliedJob.find({ user: id });
+    const jobs = await Job.find({
+      _id: { $in: appliedJobs.map((job) => job.job) },
     });
+
+    const result = appliedJobs.map((appliedJob) => {
+      const job = jobs.find(
+        (job) => job._id.toString() === appliedJob.job.toString()
+      );
+
+      return {
+        ...appliedJob._doc,
+        job: job,
+      };
+    });
+
     res.json({ status: "ok", data: result });
   } catch (err) {
     console.error(err);

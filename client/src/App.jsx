@@ -13,6 +13,8 @@ import Browse from "../src/pages/Candidate/Browse";
 import Applied from "../src/pages/Candidate/Applied";
 import CompanyJobs from "../src/pages/Company/CompanyJobs";
 import AppliedUserList from "../src/pages/Company/AppliedUserList";
+import CandidateProfile from "../src/pages/Candidate/CandidateProfile";
+import AppliedUserResume from "../src/pages/Company/AppliedUserResume";
 
 function App() {
   return (
@@ -31,12 +33,13 @@ function App() {
           <Route path="/candidate" element={<CandidateRoutes />}>
             <Route path="browse" element={<Browse />} />
             <Route path="applied" element={<Applied />} />
-            <Route path="profile" element={<div>Profile</div>} />
+            <Route path="profile" element={<CandidateProfile />} />
           </Route>
           {/* Company Private Routes */}
           <Route path="/company" element={<CompanyRoutes />}>
             <Route path="job" element={<CompanyJobs />} />
             <Route path="job/applied" element={<AppliedUserList />} />
+            <Route path="job/applied/user" element={<AppliedUserResume />} />
           </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>

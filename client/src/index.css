@@ -6,6 +6,14 @@
   @apply input input-ghost bg-transparent input-bordered w-full border-gray-500 focus:text-white focus:bg-inherit  text-sm;
 }
 
-.register-select {
+.white-select {
   @apply select select-ghost bg-transparent w-full border-gray-500 focus:text-white focus:bg-inherit text-sm;
+}
+
+.black-select {
+  @apply select select-ghost bg-transparent w-full border-gray-500 text-sm;
+}
+
+.form-input {
+  @apply input input-ghost bg-transparent input-bordered w-full border-gray-500 focus:text-black focus:bg-inherit  text-sm;
 }

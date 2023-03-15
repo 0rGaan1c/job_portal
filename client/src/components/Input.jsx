@@ -1,23 +1,32 @@
 import React from "react";
-import RegisterFormLabel from "./RegisterFormLabel";
+import InputLabel from "./InputLabel";
 
-const FormInput = ({ type, label, required, setInputText, minlength }) => {
+const Input = ({
+  type,
+  label,
+  required,
+  setInputText,
+  minlength,
+  value,
+  isDisabled,
+}) => {
   return (
     <div className="form-control my-2">
-      <RegisterFormLabel label={label} />
+      <InputLabel label={label} color="black" />
       <input
         type={type}
         placeholder={label === "Skills *" ? "Ex: HTML, CSS, JAVA" : ""}
         required={required}
-        // className="register-input"
-        className={`${label.includes("Password") ? "" : ""} register-input`}
+        className={`${label.includes("Password") ? "" : ""} form-input`}
         onChange={(e) => {
           setInputText(e.target.value);
         }}
         minLength={minlength}
+        value={value || ""}
+        disabled={isDisabled}
       />
     </div>
   );
 };
 
-export default FormInput;
+export default Input;

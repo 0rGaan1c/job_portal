@@ -1,6 +1,7 @@
 import React from "react";
 import Avatar from "react-avatar";
 import JobStatus from "./JobStatus";
+import SubmitButton from "./SubmitButton";
 
 const JobModal = ({
   companyDetail,
@@ -51,7 +52,7 @@ const JobModal = ({
               </p>
             )}
           </div>
-          <div className="border rounded-md mt-6 px-4 py-2 flex items-center justify-between">
+          <div className="border-2 rounded-md mt-6 px-4 py-2 flex items-center justify-between">
             <p className="font-medium">
               {jobRole} |<span className="ml-2">₹ {compensation} LPA</span>
             </p>

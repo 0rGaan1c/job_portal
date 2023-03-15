@@ -3,8 +3,8 @@ import Avatar from "react-avatar";
 import { useCookies } from "react-cookie";
 import { toast } from "react-hot-toast";
 import JobModal from "../components/JobModal";
-import { getCompanyDetails } from "../api/company/getCompanyDetails";
-import { applyToJobs } from "../api/candidate/applyToJobs";
+import { getCompanyDetails } from "../api/company/index";
+import { applyToJobs } from "../api/candidate/index";
 import JobStatus from "./JobStatus";
 
 const JobCard = ({ job, isAppliedPage, isBrowsePage }) => {
@@ -68,7 +68,7 @@ const JobCard = ({ job, isAppliedPage, isBrowsePage }) => {
       </div>
 
       <label htmlFor={`job-apply-modal-${_id}`} className="cursor-pointer">
-        <div className="border rounded-md mt-6 px-4 py-2 flex items-center justify-between">
+        <div className="border-2 rounded-md mt-6 px-4 py-2 flex items-center justify-between">
           <p className="font-medium">
             {jobRole} |<span className="ml-2">₹ {compensation} LPA</span>
           </p>
@@ -81,7 +81,7 @@ const JobCard = ({ job, isAppliedPage, isBrowsePage }) => {
                 Apply
               </label>
             ) : (
-              <label className="cursor-pointer btn btn-outline btn-success">
+              <label className="cursor-pointer btn btn-success text-white">
                 Applied
               </label>
             ))}

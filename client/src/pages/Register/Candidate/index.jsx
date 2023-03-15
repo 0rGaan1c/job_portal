@@ -1,15 +1,15 @@
 import { useEffect, useState } from "react";
 import { getJobRoles } from "../../../api/global";
 import { Link } from "react-router-dom";
-import FormInput from "../../../components/FormInput";
-import RegisterFormLabel from "../../../components/RegisterFormLabel";
+import AuthInput from "../../../components/AuthInput";
+import InputLabel from "../../../components/InputLabel";
 import toast from "react-hot-toast";
 import { register } from "../../../api/auth";
 import AuthLayout from "../../../Layout/AuthLayout";
 import SubmitButton from "../../../components/SubmitButton";
+import SelectJobRole from "../../../components/SelectJobRole";
 
 const index = () => {
-  const [jobRoles, setJobRoles] = useState([]);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -19,14 +19,7 @@ const index = () => {
   const [bio, setBio] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [isAccountCreated, setIsAccountCreated] = useState(false);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      setJobRoles(await getJobRoles());
-    };
-
-    fetchData();
-  }, []);
+  const [jobRoles, setJobRoles] = useState([]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -84,54 +77,33 @@ const index = () => {
       ) : (
         <form onSubmit={handleSubmit}>
           <div className="grid grid-cols-2 gap-2">
-            <FormInput
+            <AuthInput
               type="text"
               label="Name *"
               required={true}
               setInputText={setName}
             />
-            <FormInput
+            <AuthInput
               type="email"
               label="Email *"
               required={true}
               setInputText={setEmail}
             />
-            <FormInput
+            <AuthInput
               type="password"
               label="Password (Atleast 6 letters) *"
               minlength={6}
               required={true}
               setInputText={setPassword}
             />
-            <FormInput
+            <AuthInput
               type="password"
               label="Confirm Password *"
               required={true}
               setInputText={setConfirmPassword}
             />
-
-            <div className="form-control my-2">
-              <RegisterFormLabel label={"Select Job Role *"} />
-              <select
-                className="register-select"
-                required
-                onChange={(e) => {
-                  setJobRole(e.target.value);
-                }}
-              >
-                <option disabled selected>
-                  Select Job Role
-                </option>
-                {jobRoles.map(({ jobRole, _id }) => {
-                  return (
-                    <option key={_id} className="text-black">
-                      {jobRole}
-                    </option>
-                  );
-                })}
-              </select>
-            </div>
-            <FormInput
+            <SelectJobRole setJobRole={setJobRole} textColor="white" />
+            <AuthInput
               type="text"
               label="Skills *"
               required={true}
@@ -140,7 +112,7 @@ const index = () => {
           </div>
 
           <div className="form-control my-2">
-            <RegisterFormLabel label={"Your Bio"} />
+            <InputLabel label={"Your Bio"} color="white" />
             <textarea
               className="textarea textarea-bordered h-32 bg-transparent border-slate-500"
               placeholder="Bio"

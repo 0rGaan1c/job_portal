@@ -1,15 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
-import { getAllAppliedJobs } from "../../../api/candidate/getAllAppliedJobs";
+import { getAllAppliedJobs } from "../../../api/candidate/index";
 import { getAllJobs } from "../../../api/global";
 import JobCard from "../../../components/JobCard";
 import ContentLayout from "../../../Layout/ContentLayout";
 
 const index = () => {
-  // const [allJobs, setAllJobs] = useState([]);
   const [appliedJobsID, setAppliedJobsID] = useState([]);
   const [unappliedJobs, setUnappliedJobs] = useState([]);
-  // const [userAppliedJobs, setUserAppliedJobs] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -21,7 +19,7 @@ const index = () => {
         return;
       }
       const jobsIDs = result.map((res) => {
-        return res.job;
+        return res.job._id;
       });
       setAppliedJobsID(jobsIDs);
     };
