@@ -52,7 +52,7 @@ const index = () => {
           );
         })
       ) : (
-        <div>You haven't added any jobs yet.</div>
+        <div className="mt-8">You haven't added any jobs yet.</div>
       )}
       <AddJobModal
         id={"add-job"}

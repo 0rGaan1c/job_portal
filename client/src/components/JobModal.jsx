@@ -43,7 +43,9 @@ const JobModal = ({
           <div className="my-8">
             <h3 className="font-medium text-lg">About the job</h3>
             <p className="mt-2">{jobDescription}</p>
-            <p className="mt-2">Experience Required: {expRequired} years.</p>
+            {expRequired && (
+              <p className="mt-2">Experience Required: {expRequired} years.</p>
+            )}
             <p className="mt-2">Skills: {skills}</p>
             {isAppliedPage && jobStatus === "Accepted" && (
               <p className="mt-4 font-medium text-green-500 -mb-4">
