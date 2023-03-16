@@ -23,9 +23,7 @@ const SelectJobRole = ({ setJobRole, textColor, isDisabled, value }) => {
         }}
         disabled={isDisabled}
       >
-        <option disabled selected>
-          {value || "Select Job Role"}
-        </option>
+        <option selected>{value || "Select Job Role"}</option>
         {jobRoles.map(({ jobRole, _id }) => {
           return (
             <option key={_id} className="text-black">

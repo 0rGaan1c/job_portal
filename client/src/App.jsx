@@ -14,7 +14,9 @@ import Applied from "../src/pages/Candidate/Applied";
 import CompanyJobs from "../src/pages/Company/CompanyJobs";
 import AppliedUserList from "../src/pages/Company/AppliedUserList";
 import CandidateProfile from "../src/pages/Candidate/CandidateProfile";
+import CompanyProfile from "../src/pages/Company/CompanyProfile";
 import AppliedUserResume from "../src/pages/Company/AppliedUserResume";
+import ForgotPassword from "../src/pages/ForgotPassword";
 
 function App() {
   return (
@@ -28,6 +30,7 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/register/candidate" element={<CandidateRegister />} />
             <Route path="/register/company" element={<CompanyRegister />} />
+            <Route path="/forgotpassword" element={<ForgotPassword />} />
           </Route>
           {/* Candidate Private Routes */}
           <Route path="/candidate" element={<CandidateRoutes />}>
@@ -37,6 +40,7 @@ function App() {
           </Route>
           {/* Company Private Routes */}
           <Route path="/company" element={<CompanyRoutes />}>
+            <Route path="profile" element={<CompanyProfile />} />
             <Route path="job" element={<CompanyJobs />} />
             <Route path="job/applied" element={<AppliedUserList />} />
             <Route path="job/applied/user" element={<AppliedUserResume />} />

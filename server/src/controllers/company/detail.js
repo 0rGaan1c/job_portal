@@ -7,6 +7,7 @@ const getDetails = async (req, res) => {
     result = {
       companyName: result[0].companyName,
       companyDescription: result[0].companyDescription,
+      email: result[0].email,
     };
     res.send({ status: "ok", data: result });
   } catch (err) {

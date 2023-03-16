@@ -23,13 +23,16 @@ const index = () => {
 
   return (
     <ContentLayout>
+      <h1 className="-mb-4 font-medium text-xl">Applied Jobs...</h1>
       {appliedJobs.length !== 0 ? (
         appliedJobs.map(({ job, jobStatus }) => {
           const jobsData = { ...job, jobStatus };
           return <JobCard key={job._id} job={jobsData} isAppliedPage={true} />;
         })
       ) : (
-        <div>No Applied Jobs yet, Apply to a Job in the Browse section.</div>
+        <div className="mt-10">
+          No Applied Jobs yet, Apply to a Job in the Browse section.
+        </div>
       )}
     </ContentLayout>
   );

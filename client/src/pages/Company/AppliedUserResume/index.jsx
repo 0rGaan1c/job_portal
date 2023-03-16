@@ -2,12 +2,14 @@ import React, { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
 import { toast } from "react-hot-toast";
 import { useLocation } from "react-router-dom";
+import { getCandidateDetails } from "../../../api/candidate";
 import { changeJobStatus, getJobStatus } from "../../../api/company";
 import { getJobByID } from "../../../api/global";
 import InputLabel from "../../../components/InputLabel";
 import JobStatus from "../../../components/JobStatus";
-import UserDetails from "../../../components/UserDetails";
+import CandidateDetails from "../../../components/CandidateDetails";
 import ContentLayout from "../../../Layout/ContentLayout";
+import ProjectList from "../../../components/Project/ProjectList";
 
 const index = () => {
   const location = useLocation();
@@ -16,6 +18,7 @@ const index = () => {
   const [job, setJob] = useState([]);
   const [status, setStatus] = useState("");
   const [cookie, setCookie] = useCookies(["access_token"]);
+  const [candidateName, setCandidateName] = useState("");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -26,11 +29,14 @@ const index = () => {
         token: cookie.access_token,
       });
 
-      if (!result || !currentJobStatus) {
+      const candidateDetails = await getCandidateDetails(userID);
+
+      if (!result || !currentJobStatus || !candidateDetails) {
         toast.error("Error getting job.");
         return;
       }
       setJob(result);
+      setCandidateName(candidateDetails.name);
       setStatus(currentJobStatus.jobStatus);
     };
 
@@ -63,7 +69,10 @@ const index = () => {
   return (
     <ContentLayout>
       <div className="mb-4">
-        <p className="font-medium text-xl mb-4">{job.jobRole}</p>
+        <h1 className="font-medium text-xl mb-4">
+          <span className="uppercase">{candidateName}</span>'s Application
+        </h1>
+        <p className="font-medium text-lg mb-2">{job.jobRole}</p>
         <div className="border-2 p-4 rounded-sm flex">
           <div className="w-[50%]">
             <p className="font-medium">Description</p>
@@ -111,8 +120,11 @@ const index = () => {
           </div>
         </div>
       </div>
-      <p className="font-medium mt-6 text-lg mb-2">Candiate's Resume</p>
-      <UserDetails isCompanyPage={true} userID={userID} />
+      <p className="font-medium mt-6 text-lg mb-2">
+        <span className="uppercase">{candidateName}</span>'s Resume
+      </p>
+      <CandidateDetails isCompanyPage={true} userID={userID} />
+      <ProjectList isCompanyPage={true} userID={userID} />
     </ContentLayout>
   );
 };

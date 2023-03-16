@@ -38,6 +38,7 @@ const index = () => {
           Add New Job
         </label>
       </div>
+      <h1 className="-mb-6 font-medium text-xl">Your Jobs...</h1>
       {companyJobs.length !== 0 ? (
         companyJobs.map((job) => {
           return (

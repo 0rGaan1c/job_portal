@@ -45,7 +45,9 @@ const LoggedNavbar = () => {
   return (
     <nav className="flex items-center justify-between text-black py-3 shadow-sm px-16 border-b">
       <div className="flex items-center gap-10 font-medium">
-        <h1 className="font-bold text-xl">(JOBS)</h1>
+        <h1 className="font-bold text-xl">
+          (JOBS){role === "user" ? " Candidate" : " Company"}
+        </h1>
       </div>
 
       <div className="flex gap-10">
@@ -61,7 +63,8 @@ const LoggedNavbar = () => {
             className="dropdown-content menu p-2 shadow bg-base-100 rounded-sm w-52 text-black"
           >
             <li>
-              <Link to="/register/candidate">Profile</Link>
+              {role === "user" && <Link to="/candidate/profile">Profile</Link>}
+              {role === "company" && <Link to="/company/profile">Profile</Link>}
             </li>
             <li onClick={logOut}>
               <p>Log Out</p>

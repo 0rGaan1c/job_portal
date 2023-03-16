@@ -3,11 +3,28 @@ import { toast } from "react-hot-toast";
 import { getAllAppliedJobs } from "../../../api/candidate/index";
 import { getAllJobs } from "../../../api/global";
 import JobCard from "../../../components/JobCard";
+import SearchBox from "../../../components/SearchBox";
 import ContentLayout from "../../../Layout/ContentLayout";
+import Fuse from "fuse.js";
 
 const index = () => {
   const [appliedJobsID, setAppliedJobsID] = useState([]);
   const [unappliedJobs, setUnappliedJobs] = useState([]);
+  const [unappliedJobsToShow, setUnappliedJobsToShow] = useState([]);
+
+  const fuse = new Fuse(unappliedJobs, {
+    keys: ["jobRole", "skills"],
+    includeScore: true,
+  });
+
+  const onSearchTextChange = (searchText) => {
+    const results = fuse.search(searchText);
+    console.log(results);
+    const unAppliedJobAfterSearch = searchText
+      ? results.map((result) => result.item)
+      : unappliedJobs;
+    setUnappliedJobsToShow(unAppliedJobAfterSearch);
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -40,14 +57,21 @@ const index = () => {
         }
       });
       setUnappliedJobs(filterUnapplyJobs);
+      setUnappliedJobsToShow(filterUnapplyJobs);
     };
     fetchData();
   }, [appliedJobsID]);
 
   return (
     <ContentLayout>
-      {unappliedJobs.length !== 0 ? (
-        unappliedJobs.map((job) => {
+      <div className="flex justify-between">
+        <h1 className="-mb-4 font-medium text-xl">
+          Browse and Apply to Jobs...
+        </h1>
+        <SearchBox onSearchTextChange={onSearchTextChange} />
+      </div>
+      {unappliedJobsToShow.length !== 0 ? (
+        unappliedJobsToShow.map((job) => {
           return <JobCard key={job._id} job={job} isBrowsePage={true} />;
         })
       ) : (

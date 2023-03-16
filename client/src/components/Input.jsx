@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import InputLabel from "./InputLabel";
 
 const Input = ({
@@ -22,7 +22,7 @@ const Input = ({
           setInputText(e.target.value);
         }}
         minLength={minlength}
-        value={value || ""}
+        value={value}
         disabled={isDisabled}
       />
     </div>

@@ -11,6 +11,17 @@ export const getCompanyDetails = async (companyID) => {
   }
 };
 
+export const updateCompanyDetails = async (formData) => {
+  try {
+    const { data } = await axios.patch(`${COMPANYURL}/detail`, formData);
+    console.log(data);
+    return data.status === "ok" ? data.data : data;
+  } catch (err) {
+    console.error(err);
+    return false;
+  }
+};
+
 export const getAllCompanyJobs = async (companyID) => {
   try {
     const { data } = await axios.get(`${COMPANYURL}/job/${companyID}`);

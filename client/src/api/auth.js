@@ -24,3 +24,13 @@ export const login = async (formData) => {
     return false;
   }
 };
+
+export const forgotPassword = async (formData) => {
+  try {
+    const { data } = await axios.post(`${URL}/forgotpassword`, formData);
+    return data.status === "ok" ? "ok" : false;
+  } catch (err) {
+    console.error(err);
+    return false;
+  }
+};

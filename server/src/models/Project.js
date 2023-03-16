@@ -15,7 +15,6 @@ const ProjectSchema = new mongoose.Schema({
   projectName: {
     type: String,
     required: [true, requiredErrorMessage("Project Name")],
-    minlength: [2, minLengthErrorMessage(2, "Project Name")],
     maxlength: [20, maxLengthErrorMessage(20, "Project Name")],
   },
   projectDescription: {
@@ -24,7 +23,7 @@ const ProjectSchema = new mongoose.Schema({
     maxlength: [200, maxLengthErrorMessage(200, "Project Description")],
   },
   projectStack: {
-    type: [String],
+    type: String,
     required: [true, requiredErrorMessage("Project Stack")],
     maxlength: [50, maxLengthErrorMessage(50, "Project Stack")],
   },
