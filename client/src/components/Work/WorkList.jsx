@@ -1,25 +1,24 @@
 import React, { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
 import { getProfileSection } from "../../api/candidate";
-import { Link } from "react-router-dom";
-import Project from "./Project";
-import ProjectModal from "./ProjectModal";
+import Work from "./Work";
+import WorkModal from "./WorkModal";
 
-const ProjectList = ({ userID, isCandidatePage }) => {
-  const [projectList, setProjectList] = useState([]);
+const WorkList = ({ userID, isCandidatePage }) => {
+  const [workList, setWorkList] = useState([]);
   const [isProfileChanged, setIsProfileChanged] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
-      const result = await getProfileSection(userID, "project");
+      const result = await getProfileSection(userID, "workexp");
 
       if (!result) {
-        toast.error("Error getting projects");
+        toast.error("Error getting work");
         return;
       }
 
-      setProjectList(result);
+      setWorkList(result);
       setIsProfileChanged(false);
     };
 
@@ -29,21 +28,20 @@ const ProjectList = ({ userID, isCandidatePage }) => {
   return (
     <div>
       <p className="font-medium text-lg mb-2 flex justify-between items-center mt-8">
-        <p>Projects</p>
+        <p>Work Experience</p>
         {isCandidatePage && (
           <>
             <label
               className="btn btn-success btn-outline"
-              htmlFor="Add Project"
+              htmlFor="Add Work"
               onClick={() => {
                 setIsModalOpen(true);
               }}
             >
-              {/* <Link to="/candidate/profile/add-project">Add New Project</Link> */}
-              Add New Project
+              Add New Work
             </label>
-            <ProjectModal
-              type={"Add Project"}
+            <WorkModal
+              type="Add Work"
               isModalOpen={isModalOpen}
               setIsModalOpen={setIsModalOpen}
               setIsProfileChanged={setIsProfileChanged}
@@ -52,23 +50,23 @@ const ProjectList = ({ userID, isCandidatePage }) => {
         )}
       </p>
       <div className="border-2 p-4 rounded-sm grid grid-cols-3 gap-4">
-        {projectList.length !== 0 ? (
-          projectList.map((project) => {
+        {workList.length !== 0 ? (
+          workList.map((work) => {
             return (
-              <Project
-                project={project}
-                key={project._id}
+              <Work
+                work={work}
+                key={work._id}
                 isCandidatePage={isCandidatePage}
                 setIsProfileChanged={setIsProfileChanged}
               />
             );
           })
         ) : (
-          <div>No Projects</div>
+          <div>No Work Experience</div>
         )}
       </div>
     </div>
   );
 };
 
-export default ProjectList;
+export default WorkList;

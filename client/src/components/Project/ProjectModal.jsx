@@ -8,7 +8,7 @@ const ProjectModal = ({
   type,
   isModalOpen,
   setIsModalOpen,
-  setIsProjectListChanged,
+  setIsProfileChanged,
   project,
 }) => {
   const [projectName, setProjectName] = useState("");
@@ -58,7 +58,7 @@ const ProjectModal = ({
       }
 
       toast.success("Project Created");
-      setIsProjectListChanged(true);
+      setIsProfileChanged(true);
     }
     if (type === "Edit Project") {
       const result = await editProfileSection("project", {
@@ -70,10 +70,15 @@ const ProjectModal = ({
         return;
       }
       toast.success("Project Updated");
-      setIsProjectListChanged(true);
+      setIsProfileChanged(true);
     }
 
     setIsModalOpen(false);
+    setProjectName("");
+    setProjectDescription("");
+    setProjectStack("");
+    setProjectLiveUrl("");
+    setProjectCodeUrl("");
     e.target.reset();
   };
 

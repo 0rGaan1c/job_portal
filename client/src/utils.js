@@ -13,3 +13,7 @@ export function parseJwt(token) {
 
   return JSON.parse(jsonPayload);
 }
+
+export const getDate = (date) => {
+  return new Date(date).toDateString();
+};

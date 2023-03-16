@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import DeleteModal from "../DeleteModal";
 import ProjectModal from "./ProjectModal";
 
-const Project = ({ project, isCandidatePage, setIsProjectListChanged }) => {
+const Project = ({ project, isCandidatePage, setIsProfileChanged }) => {
   const {
     projectName,
     projectDescription,
@@ -37,7 +37,7 @@ const Project = ({ project, isCandidatePage, setIsProjectListChanged }) => {
               type="Edit Project"
               isModalOpen={isModalOpen}
               setIsModalOpen={setIsModalOpen}
-              setIsProjectListChanged={setIsProjectListChanged}
+              setIsProfileChanged={setIsProfileChanged}
               project={project}
             />
             <label
@@ -48,9 +48,9 @@ const Project = ({ project, isCandidatePage, setIsProjectListChanged }) => {
               <AiFillDelete />
             </label>
             <DeleteModal
-              projectID={_id}
+              ID={_id}
               sectionType={"project"}
-              setIsProjectListChanged={setIsProjectListChanged}
+              setIsProfileChanged={setIsProfileChanged}
             />
           </div>
         )}

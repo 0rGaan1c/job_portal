@@ -14,13 +14,11 @@ const WorkSchema = new mongoose.Schema({
   companyName: {
     type: String,
     required: [true, requiredErrorMessage("Company Name")],
-    minlength: [2, minLengthErrorMessage(2, "Company Name")],
     maxlength: [50, maxLengthErrorMessage(50, "Company Name")],
   },
   jobTitle: {
     type: String,
     required: [true, requiredErrorMessage("Job Title")],
-    minlength: [3, minLengthErrorMessage(3, "Job Title")],
     maxlength: [50, maxLengthErrorMessage(50, "Job Title")],
   },
   jobDescription: {
@@ -29,6 +27,7 @@ const WorkSchema = new mongoose.Schema({
     maxlength: [200, maxLengthErrorMessage(50, "Job Description")],
   },
   fromDate: {
+    required: [true, requiredErrorMessage("From Date")],
     type: Date,
   },
   toDate: {

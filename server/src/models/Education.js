@@ -14,16 +14,15 @@ const EducationSchema = new mongoose.Schema({
   graduationType: {
     type: String,
     required: [true, requiredErrorMessage("Graduation Type")],
-    minlength: [2, minLengthErrorMessage(2, "Graduation Type")],
     maxlength: [20, maxLengthErrorMessage(20, "Graduation Type")],
   },
   degreeName: {
     type: String,
     required: [true, requiredErrorMessage("Degree Name")],
-    minlength: [2, minLengthErrorMessage(2, "Degree Name")],
     maxlength: [50, maxLengthErrorMessage(20, "Degree Name")],
   },
   fromDate: {
+    required: [true, requiredErrorMessage("From Date")],
     type: Date,
   },
   toDate: {

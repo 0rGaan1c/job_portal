@@ -10,6 +10,8 @@ import JobStatus from "../../../components/JobStatus";
 import CandidateDetails from "../../../components/CandidateDetails";
 import ContentLayout from "../../../Layout/ContentLayout";
 import ProjectList from "../../../components/Project/ProjectList";
+import WorkList from "../../../components/Work/WorkList";
+import EducationList from "../../../components/Education/EducationList";
 
 const index = () => {
   const location = useLocation();
@@ -124,7 +126,9 @@ const index = () => {
         <span className="uppercase">{candidateName}</span>'s Resume
       </p>
       <CandidateDetails isCompanyPage={true} userID={userID} />
-      <ProjectList isCompanyPage={true} userID={userID} />
+      <WorkList userID={userID} />
+      <ProjectList userID={userID} />
+      <EducationList userID={userID} />
     </ContentLayout>
   );
 };

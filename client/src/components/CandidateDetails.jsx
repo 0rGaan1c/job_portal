@@ -68,7 +68,7 @@ const CandidateDetails = ({ isCandidatePage, isCompanyPage, userID }) => {
     <>
       {isUserLoaded && (
         <div className="border-2 p-4 rounded-sm mb-6">
-          <div className="flex justify-between">
+          <div className="flex justify-end">
             {/* <h1 className="font-medium text-lg">Details</h1> */}
             {isCandidatePage && (
               <button
