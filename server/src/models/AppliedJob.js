@@ -24,6 +24,7 @@ const AppliedJobSchema = new mongoose.Schema({
   },
   jobStatus: {
     type: String,
+    enum: ["Pending", "Reviewing", "Accepted", "Rejected"],
     required: [true, requiredErrorMessage("Job Status")],
   },
 });

@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const { requiredErrorMessage } = require("../utils");
 
 const JobRoleSchema = new mongoose.Schema({
-  toDate: {
+  jobRole: {
     type: String,
     required: [true, requiredErrorMessage("Job Role")],
   },
