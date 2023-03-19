@@ -8,7 +8,7 @@ const index = () => {
   return (
     <>
       <Navbar />
-      <div className="bg-hero-img w-full h-screen bg-cover absolute top-0 z-[-1]">
+      <div className="bg-black w-full h-screen bg-cover absolute top-0 z-[-1]">
         <h2 className="h-screen flex justify-center items-center flex-col text-white text-4xl w-[70%] mx-auto text-center -mt-12 leading-relaxed">
           <p>Easily create your profile and apply to Developer Jobs. </p>
           <p>Or Post Jobs and hire suitable candidates.</p>
