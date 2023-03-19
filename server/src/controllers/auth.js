@@ -14,6 +14,7 @@ const register = async (req, res) => {
     jobRole,
     skills,
     bio,
+    contactEmail,
     companyName,
     companyDescription,
   } = req.body;
@@ -33,6 +34,7 @@ const register = async (req, res) => {
         ? await User.create({
             email,
             password,
+            contactEmail,
             role,
             name,
             jobRole,

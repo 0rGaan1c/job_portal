@@ -8,7 +8,7 @@ const index = ({ children, textOne, textTwo }) => {
         {textOne}{" "}
         <span className="text-base font-normal text-gray-700">{textTwo}</span>
       </h2>
-      <div className="w-[60%] mx-auto h-[75vh] border-2 rounded-md p-4 border-white">
+      <div className="w-[60%] mx-auto h-[80vh] border-2 rounded-md p-4 border-white">
         {children}
       </div>
       <h2 className="w-[60%] mx-auto py-2 text-base">

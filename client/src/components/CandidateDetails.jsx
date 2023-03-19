@@ -13,6 +13,7 @@ import InputLabel from "./InputLabel";
 const CandidateDetails = ({ isCandidatePage, isCompanyPage, userID }) => {
   const [isDisabled, setIsDisabled] = useState(true);
   const [email, setEmail] = useState("");
+  const [contactEmail, setContactEmail] = useState("");
   const [name, setName] = useState("");
   const [skills, setSkills] = useState("");
   const [jobRole, setJobRole] = useState("");
@@ -29,6 +30,7 @@ const CandidateDetails = ({ isCandidatePage, isCompanyPage, userID }) => {
         return;
       }
       setEmail(result.email);
+      setContactEmail(result.contactEmail);
       setName(result.name);
       setSkills(result.skills);
       setJobRole(result.jobRole);
@@ -81,10 +83,19 @@ const CandidateDetails = ({ isCandidatePage, isCompanyPage, userID }) => {
           </div>
           <form onSubmit={handleSubmit}>
             <div className="grid grid-cols-4 gap-5">
+              {isCandidatePage && (
+                <Input
+                  value={email}
+                  type="email"
+                  label="Email *"
+                  required={true}
+                  isDisabled={true}
+                />
+              )}
               <Input
-                value={email}
+                value={contactEmail}
                 type="email"
-                label="Email *"
+                label="Contact Email *"
                 required={true}
                 isDisabled={true}
               />

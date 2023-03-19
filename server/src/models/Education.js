@@ -19,7 +19,7 @@ const EducationSchema = new mongoose.Schema({
   degreeName: {
     type: String,
     required: [true, requiredErrorMessage("Degree Name")],
-    maxlength: [50, maxLengthErrorMessage(20, "Degree Name")],
+    maxlength: [50, maxLengthErrorMessage(50, "Degree Name")],
   },
   fromDate: {
     required: [true, requiredErrorMessage("From Date")],

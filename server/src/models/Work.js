@@ -24,7 +24,7 @@ const WorkSchema = new mongoose.Schema({
   jobDescription: {
     type: String,
     required: [true, requiredErrorMessage("Job Description")],
-    maxlength: [200, maxLengthErrorMessage(50, "Job Description")],
+    maxlength: [200, maxLengthErrorMessage(200, "Job Description")],
   },
   fromDate: {
     required: [true, requiredErrorMessage("From Date")],

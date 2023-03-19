@@ -12,6 +12,7 @@ import SelectJobRole from "../../../components/SelectJobRole";
 const index = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [contactEmail, setContactEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [jobRole, setJobRole] = useState("");
@@ -27,6 +28,10 @@ const index = () => {
       toast.error("Password doesn't match.");
       return;
     }
+    if (email === contactEmail) {
+      toast.error("Email & Contact Email should be different.");
+      return;
+    }
     if (!jobRole) {
       toast.error("Please Select a Job Role.");
       return;
@@ -36,6 +41,7 @@ const index = () => {
     const formData = {
       name,
       email,
+      contactEmail,
       password,
       role: "user",
       jobRole,
@@ -76,7 +82,7 @@ const index = () => {
         </div>
       ) : (
         <form onSubmit={handleSubmit}>
-          <div className="grid grid-cols-2 gap-2">
+          <div className="grid grid-cols-3 gap-2">
             <AuthInput
               type="text"
               label="Name *"
@@ -88,6 +94,12 @@ const index = () => {
               label="Email *"
               required={true}
               setInputText={setEmail}
+            />
+            <AuthInput
+              type="email"
+              label="Contact Email *"
+              required={true}
+              setInputText={setContactEmail}
             />
             <AuthInput
               type="password"

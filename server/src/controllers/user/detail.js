@@ -10,6 +10,7 @@ const getDetails = async (req, res) => {
       bio: result[0].bio,
       name: result[0].name,
       jobRole: result[0].jobRole,
+      contactEmail: result[0].contactEmail,
     };
 
     res.send({ status: "ok", data: result });
