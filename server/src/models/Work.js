@@ -1,9 +1,5 @@
 const mongoose = require("mongoose");
-const {
-  requiredErrorMessage,
-  minLengthErrorMessage,
-  maxLengthErrorMessage,
-} = require("../utils");
+const { requiredErrorMessage, maxLengthErrorMessage } = require("../utils");
 
 const WorkSchema = new mongoose.Schema({
   user: {

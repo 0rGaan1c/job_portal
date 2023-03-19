@@ -16,16 +16,6 @@ const CompanyNav = () => {
       >
         Jobs
       </Link>
-      {/* <Link
-        to="/company/p"
-        className={`${
-          currentPath.includes("job/applied")
-            ? "font-medium  border-b-2 border-black"
-            : ""
-        } hover:font-medium`}
-      >
-        Applied
-      </Link> */}
       <Link
         to="/company/profile"
         className={`${

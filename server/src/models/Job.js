@@ -1,10 +1,6 @@
 const mongoose = require("mongoose");
-const validator = require("validator");
-const {
-  requiredErrorMessage,
-  minLengthErrorMessage,
-  maxLengthErrorMessage,
-} = require("../utils");
+
+const { requiredErrorMessage, maxLengthErrorMessage } = require("../utils");
 
 const JobSchema = new mongoose.Schema({
   company: {

@@ -1,3 +1,6 @@
+const User = require("../models/User");
+const Company = require("../models/Company");
+
 const roleValidator = (req, res, next) => {
   const { role } = req.body;
   if (role === "user" || role === "company") {
@@ -7,9 +10,16 @@ const roleValidator = (req, res, next) => {
   }
 };
 
-const userValidator = (req, res, next) => {
-  const { role } = req.decoded;
+const userValidator = async (req, res, next) => {
+  const { role, id } = req.decoded;
   if (role === "user") {
+    const user = await User.findOne({ _id: id }).lean();
+    if (!user) {
+      return res.json({
+        status: "error",
+        error: "Only user can access this route.",
+      });
+    }
     next();
   } else {
     return res.json({
@@ -19,9 +29,16 @@ const userValidator = (req, res, next) => {
   }
 };
 
-const companyValidator = (req, res, next) => {
-  const { role } = req.decoded;
+const companyValidator = async (req, res, next) => {
+  const { role, id } = req.decoded;
   if (role === "company") {
+    const company = await Company.findOne({ _id: id }).lean();
+    if (!company) {
+      return res.json({
+        status: "error",
+        error: "Only company can access this route.",
+      });
+    }
     next();
   } else {
     return res.json({
