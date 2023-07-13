@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { toast } from "react-hot-toast";
 import { getAllAppliedJobs } from "../../../api/candidate/index";
 import { getAllJobs } from "../../../api/global";
@@ -11,6 +11,7 @@ const index = () => {
   const [appliedJobsID, setAppliedJobsID] = useState([]);
   const [unappliedJobs, setUnappliedJobs] = useState([]);
   const [unappliedJobsToShow, setUnappliedJobsToShow] = useState([]);
+  const firstRender = useRef(true);
 
   const fuse = new Fuse(unappliedJobs, {
     keys: ["jobRole", "skills"],
@@ -39,12 +40,15 @@ const index = () => {
         return res.job._id;
       });
       setAppliedJobsID(jobsIDs);
+      firstRender.current = false;
     };
 
     fetchData();
   }, []);
 
   useEffect(() => {
+    if (firstRender.current) return;
+
     const fetchData = async () => {
       const result = await getAllJobs();
       if (!result) {
