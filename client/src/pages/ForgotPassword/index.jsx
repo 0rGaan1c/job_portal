@@ -59,7 +59,7 @@ const index = () => {
       <h2 className="w-[40%] mx-auto py-2 text-xl font-medium">
         Forgot Password
       </h2>
-      <div className="w-[40%] mx-auto h-[48vh] border-2 rounded-md p-4 border-white">
+      <div className="w-[40%] mx-auto h-[52vh] border-2 rounded-md p-4 border-white">
         <form onSubmit={handleSubmit}>
           <AuthInput
             type="email"
